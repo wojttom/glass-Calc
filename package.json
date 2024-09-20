@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://wojttom.github.io/glass-calc/",
+  "homepage": "https://wojttom.github.io/glass-Calc/",
   "scripts": {
     "dev": "vite",
     "predeploy": "vite build",
