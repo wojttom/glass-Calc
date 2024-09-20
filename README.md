@@ -1,5 +1,9 @@
-# Vue 3 + TypeScript + Vite
+# [WIP] Responsive graphic calculator app made in vue + viteTS
+main goal of this project was to learn vue, vite and TypeScript along with some css experimentation
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+todo:
+- make it work
+- *mabye* make it as a standalone app
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+state of 09.20.2024: 
+![state of 09.20.2024](https://github.com/wojttom/glass-Calc/blob/master/public/img-01.png?raw=true)
