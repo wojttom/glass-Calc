@@ -1,31 +1,31 @@
 <template>
     <div class="center">
         <div class="main">
-            <div class="results" id="results">{{ numberTyped }}</div>
+            <div class="results" id="results">{{display}}</div>
             <div class="button number" id="copy" >Copy</div>
             <div class="button percent" id="percent">%</div>
             <div class="button CE" id="CE">CE</div>
-            <div class="button C" id="C">C</div>
-            <div class="button delete" id="delete"><</div>
+            <div class="button C" @click ="" id="C">C</div>
+            <div class="button delete" @click="" id="delete"><</div>
             <div class="button oneByX" id="oneByX"><sup>1&nbsp;</sup>&frasl;<sub>&nbsp;x</sub></div>
-            <div class="button square" @click="power"id="square">X<sup>2</sup></div>
+            <div class="button square" @click=""id="square">X<sup>2</sup></div>
             <div class="button root" id="root"> √x</div>
-            <div class="button divide" @click="setOperator('/')"id="divide">/</div>
-            <div class="button number" v-on:click="numClicked(7)" id="seven">7</div>
-            <div class="button number" @click="numClicked(8)" id="eight">8</div>
-            <div class="button number" @click="numClicked(9)" id="nine">9</div>
-            <div class="button times" @click="setOperator('*')"id="times">*</div>
-            <div class="button number" @click="numClicked(4)" id="four">4</div>
-            <div class="button number" @click="numClicked(5)" id="five">5</div>
-            <div class="button number" @click="numClicked(6)" id="six">6</div>
-            <div class="button minus" @click="setOperator('-')"id="minus">-</div>
-            <div class="button number" @click="numClicked(1)"id="one">1</div>
-            <div class="button number" @click="numClicked(2)"id="two">2</div>
-            <div class="button number" @click="numClicked(3)" id="three">3</div>
-            <div class="button plus" @click="setOperator('+')" id="plus">+</div>
-            <div class="button number zero" @click="numClicked(0)" id="zero">0</div>
-            <div class="button coma" @click="comaClicked" id="coma">,</div>
-            <div class="button equals" @click="operations"id="equals">=</div>
+            <div class="button divide" @click=""id="divide">/</div>
+            <div class="button number" v-on:click="" id="seven">7</div>
+            <div class="button number" @click="" id="eight">8</div>
+            <div class="button number" @click="" id="nine">9</div>
+            <div class="button times" @click=""id="times">*</div>
+            <div class="button number" @click="" id="four">4</div>
+            <div class="button number" @click="" id="five">5</div>
+            <div class="button number" @click="" id="six">6</div>
+            <div class="button minus" @click=""id="minus">-</div>
+            <div class="button number" @click=""id="one">1</div>
+            <div class="button number" @click=""id="two">2</div>
+            <div class="button number" @click="" id="three">3</div>
+            <div class="button plus" @click="" id="plus">+</div>
+            <div class="button number zero" @click="" id="zero">0</div>
+            <div class="button coma" @click="" id="coma">,</div>
+            <div class="button equals" @click=""id="equals">=</div>
         </div>
     </div>
 </template>
@@ -33,106 +33,39 @@
 import { ref } from 'vue';
     export default{
         setup(){
+
+            // Definicja
+            let display = ref('');
             let number1 = ref('');
             let number2 = ref('');
             let isEnteringNumber2 = ref(false);
             let operator = ref('');
             let results = 0;
             let numberTyped = ref("");
-            const numClicked = (number: number) => {
-                numberTyped.value +=number.toString();
-            };
-            const comaClicked = () => {
-                if(!numberTyped.value.includes(',')){
-                    numberTyped.value+=',';
-                }
-            };
-            const setOperator = (a:string) =>{
-                if (!isEnteringNumber2.value){
-                    number1.value = numberTyped.value;
-                }else{
-                    operations();
-                    number1.value = numberTyped.value;
-                }
-                operator.value = a;
-                numberTyped.value += a;
-                isEnteringNumber2.value=true;
-            }
+            const operators = ['+', '-', '*', '/'];
 
-            const root = () => {
-                const currentNum  = parseFloat(numberTyped.value.replace(',','.'));
-                if(!isNaN(currentNum)){
-                    results= Math.sqrt(currentNum);
-                    numberTyped.value = results.toString().replace('.', ',');
-                    number1.value = results.toString();
-                    number2.value = '';
-                    operator.value = '';
-                    isEnteringNumber2.value=false;
-                }
-            }
-            const power = () => {
-                const currentNum  = parseFloat(numberTyped.value.replace(',','.'));
-                if(!isNaN(currentNum)){
-                    results = Math.pow(currentNum,2);
-                    numberTyped.value = results.toString().replace('.', ',');
-                    number1.value = results.toString();
-                    number2.value = '';
-                    operator.value = '';
-                    isEnteringNumber2.value=false;
-                }
-            }
-            const oneByX=()=>{
-                const currentNum  = parseFloat(numberTyped.value.replace(',','.'));
-                if(!isNaN(currentNum)){
-                    results = 1 / (currentNum);
-                    numberTyped.value = results.toString().replace('.', ',');
-                    number1.value = results.toString();
-                    number2.value = '';
-                    operator.value = '';
-                    isEnteringNumber2.value=false;
-                }
-            }
-            const operations = () => {
-                if(isEnteringNumber2.value){
-                    number2.value=numberTyped.value;
-                }
-                let num1 = parseFloat(number1.value.replace(',','.'));
-                let num2 = parseFloat(number2.value.replace(',','.'));
-                switch(operator.value){
-                    case'+':
-                        results = num1+num2;
-                        break;
-                    case'-':
-                        results = num1-num2;
-                        break;
-                    case'*':
-                        results = num1*num2;
-                        break;
-                    case'/':
-                        if(num2==0){
-                            numberTyped.value ="Can't divide by 0"
-                            num2=0;
-                            break;
-                        }
-                        results = num1/num2;
-                        break;
-                }
-                numberTyped.value = results.toString().replace('.', ',');
-                number1.value = results.toString();
-                number2.value = '';
-                operator.value = '';
-                isEnteringNumber2.value=false;
-            }
+            // Logika
+            // Wprowadzanie liczb
+
+            // Obsługa przecinka 
+
+            // Obsługa operatorów 
+            
+            // Czyszczenie wszystkiego 
+            // NIE DZIAŁA W 100%
+
+            // Czyszczenie ostatniej liczby
+
+            // Pierwiastek
+
+            // Do potęgi 2
+
+            // 1 przez liczbe wpisaną
+
+            // Wykonywanie działań
 
             return {
-                numberTyped,
-                numClicked,
-                comaClicked,
-                setOperator,
-                operations,
-                power,
-                root,
-                oneByX,
+                display,
             }
         },
     }
